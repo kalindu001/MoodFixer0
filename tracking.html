@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Fixer - Tracking</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+                    <img src="mood fix logo.png" alt="Mood Fixer Logo" class="nav-logo-img">
+                    <span class="nav-brand">Mood Fixer</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="index.html#step-identity" id="nav-get-started">Get Started</a></li>
+                <li><a href="index.html#step-mood" id="nav-pick-mood">Pick Mood</a></li>
+                <li><a href="tracking.html" id="nav-tracking" class="active">Stats</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com"
+                        target="_blank">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="index.html" style="text-decoration: none;">
+                    <button class="btn-nav-cta">Start Journey</button>
+                </a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-hamburger" id="nav-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mob-link">Home</a></li>
+            <li><a href="index.html#step-identity" class="mob-link">Get Started</a></li>
+            <li><a href="index.html#step-mood" class="mob-link">Pick Mood</a></li>
+            <li><a href="tracking.html" class="mob-link">Stats</a></li>
+            <li><a href="safety.html" class="mob-link">Safety Help</a></li>
+            <li><a href="faq.html" class="mob-link">FAQ</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank">Contact</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Emotional Background Animation -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+
+    <div id="app" style="position: relative; min-height: 80vh;">
+        <!-- Main Content Area -->
+        <main id="main-content" style="width: 100%; display: flex; justify-content: center; padding-top: 6rem;">
+            <div class="glass-container" style="max-width: 900px; width: 95%;">
+                <header class="main-header" style="margin-bottom: 1.5rem;">
+                    <div class="header-text">
+                        <h1 class="gradient-text">Mood Tracker</h1>
+                        <p class="subtitle">Your emotional journey over time.</p>
+                    </div>
+                </header>
+
+                <!-- Quick Stats Grid -->
+                <div class="stats-overview-grid">
+                    <div class="stat-card">
+                        <span class="stat-card-icon">📊</span>
+                        <div class="stat-card-info">
+                            <span class="stat-card-label">Total Logs</span>
+                            <span id="stat-total-logs" class="stat-card-value">-</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-icon">🔥</span>
+                        <div class="stat-card-info">
+                            <span class="stat-card-label">Current Streak</span>
+                            <span id="stat-streak" class="stat-card-value">-</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card-icon">🌟</span>
+                        <div class="stat-card-info">
+                            <span class="stat-card-label">Top Mood</span>
+                            <span id="stat-top-mood" class="stat-card-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container chart-container-stats">
+                    <canvas id="moodChart"></canvas>
+                </div>
+
+                <div class="calendar-section" style="margin-top: 3rem;">
+                    <h2 id="calendar-title"
+                        style="margin-bottom: 0.5rem; color: var(--text-primary); font-size: 1.5rem;">Past 30 Days</h2>
+                    <p id="calendar-desc"
+                        style="margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--text-secondary);">A visual
+                        summary of your mood entries.</p>
+                    <div id="mood-calendar" class="mood-calendar">
+                        <!-- Calendar days will be injected here by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bottom Footer -->
+    <footer class="bottom-footer">
+        <div class="footer-sections"
+            style="padding-top: 3rem; display: flex; justify-content: space-evenly; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
+
+            <!-- Section 2: Quick Links -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Quick Links</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html" id="footer-home" class="footer-link"> Home</a></li>
+                    <li><a href="index.html#step-identity" id="footer-get-started" class="footer-link"> Get Started</a>
+                    </li>
+                    <li><a href="index.html#step-mood" id="footer-pick-mood" class="footer-link"> Pick Your Mood</a>
+                    </li>
+                    <li><a href="index.html#step-result" id="footer-result" class="footer-link"> Your Result</a></li>
+                    <li><a href="tracking.html" id="footer-tracking" class="footer-link"> Your Stats</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 3: Support -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Support</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy.html" class="footer-link"> Privacy Policy</a></li>
+                    <li><a href="terms.html" class="footer-link"> Terms of Use</a></li>
+                    <li><a href="faq.html" class="footer-link"> FAQ</a></li>
+                    <li><a href="safety.html" class="footer-link"> Safety &amp; Crisis Help</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 4: Contact -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Contact Us</h4>
+                <p class="footer-contact-text">Have a question or feedback? We'd love to hear from you.</p>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank"
+                    class="footer-email-btn">📧 Send an Email</a>
+                <p class="footer-contact-note">We usually respond within 24–48 hours.</p>
+            </div>
+
+        </div>
+
+        <!-- Copyright Strip -->
+        <div class="footer-copyright-strip">
+            <span>&copy; 2026 <strong>Mood Fixer</strong> &mdash; Made with by P.R.K.I. Pallegama</span>
+            <span class="footer-powered">Powered by the Mood Fixer Project Team &amp; Gemini AI</span>
+        </div>
+    </footer>
+
+    <script src="tracking.js"></script>
+</body>
+
+</html>

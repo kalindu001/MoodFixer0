@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Mood Fixer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+                    <img src="mood fix logo.png" alt="Mood Fixer Logo" class="nav-logo-img">
+                    <span class="nav-brand">Mood Fixer</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#step-identity">Get Started</a></li>
+                <li><a href="index.html#step-mood">Pick Mood</a></li>
+                <li><a href="tracking.html">Stats</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com"
+                        target="_blank">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="index.html" style="text-decoration: none;" class="btn-nav-cta">Start Journey</a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-hamburger" id="nav-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mob-link">Home</a></li>
+            <li><a href="index.html#step-identity" class="mob-link">Get Started</a></li>
+            <li><a href="index.html#step-mood" class="mob-link">Pick Mood</a></li>
+            <li><a href="tracking.html" class="mob-link">Stats</a></li>
+            <li><a href="safety.html" class="mob-link">Safety Help</a></li>
+            <li><a href="faq.html" class="mob-link">FAQ</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank">Contact</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Emotional Background Animation -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+
+    <div id="app">
+        <main id="main-content" style="padding-top: 7rem; padding-bottom: 4rem;">
+            <div class="glass-container" style="max-width: 800px; margin: 0 auto; width: 95%;">
+                <header class="main-header" style="margin-bottom: 2rem;">
+                    <img src="mood fix logo.png" alt="Mood Fixer Logo" class="title-logo">
+                    <div class="header-text">
+                        <h1 class="gradient-text">FAQ</h1>
+                        <p class="subtitle">Frequently Asked Questions</p>
+                    </div>
+                </header>
+
+                <p class="subtitle"
+                    style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; color: var(--text-secondary); text-align: center;">
+                    Welcome to the Mood Fixer help center! Here you can find answers to how our platform works, who we
+                    serve, and how we aim to change your day for the better.
+                </p>
+
+                <!-- Accordion FAQ Container -->
+                <div class="faq-accordion">
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">1. What is Mood Fixer?</h3>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Mood Fixer is an interactive, AI-driven website designed to instantly shift your
+                                    mindset. our mission is to deliver the exact words
+                                    you need right when you need them—whether that is a fascinating fact, a powerful
+                                    dose of motivation, or a well-timed joke. We do not believe in boring walls of text
+                                    or dull colors. We deliver high-energy, impactful results in just one or two
+                                    sentences.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">2. Who is this website for?</h3>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Our platform is inclusive and open to absolutely everyone. We cater to all
+                                    individuals across the globe, including:</p>
+                                <ul
+                                    style="list-style: none; padding-left: 1rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <li> Females</li>
+                                    <li> Males</li>
+                                    <li> Transgender individuals</li>
+                                </ul>
+                                <p style="margin-top: 0.8rem;">No matter who you are, your emotional well-being matters
+                                    to us.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">3. How does the AI understand my mood?</h3>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>We make it incredibly easy for you to share your feelings. When you visit the site,
+                                    you can either click an emoji that represents how you feel right now or type a quick
+                                    description of what is on your mind.</p>
+                                <p style="margin-top: 0.8rem;">Our built-in AI analyzes your input to instantly detect
+                                    your current state—whether you are sad, happy, just waking up, getting ready for
+                                    sleep, or simply having a normal day. It then handpicks the perfect response to
+                                    match your energy.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">4. Why are the responses only 1 or 2 sentences?</h3>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>We believe that a single phrase can change a person's life, day, week, or even year.
+                                    Long paragraphs can be boring and tiresome to read. By keeping our results to a
+                                    maximum of two sentences, we ensure that the message is powerful, memorable, and
+                                    gives you an instant boost of morale before you leave our site.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">5. Why does the website save my sign-in date and time?</h3>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Mood Fixer features an active calendar and clock system. We save your sign-in date
+                                    and time so you can track your journey with us. This system is also designed to
+                                    encourage you to return for your second day, helping you build a daily habit of
+                                    checking in on your happiness.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">6. Is this a substitute for professional mental health therapy?
+                            </h3>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p><strong>No.</strong> While Mood Fixer is designed to bring joy, motivation, and a
+                                    positive morale boost, it is purely for motivational and entertainment purposes.
+                                    Mood Fixer and its creator, P.R.K.I. Pallegama, do not provide professional medical
+                                    or crisis counseling, and are not legally responsible for personal actions or
+                                    emergencies. If you are going through a severe crisis, please reach out to a
+                                    professional healthcare provider immediately.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <h3 class="accordion-title">7. Is the website fully finished?</h3>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Not at all! This is just the beginning. We are highly committed to the future of Mood
+                                    Fixer. We hope to launch exciting future updates soon, including advanced AI
+                                    features, more content categories, and new interactive tools to make your experience
+                                    even better.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div
+                    style="margin-top: 3rem; padding: 2rem; background: rgba(255, 255, 255, 0.25); border-radius: 24px; text-align: center; border: 1px solid var(--glass-border);">
+                    <h3 style="color: var(--accent); margin-bottom: 0.5rem; font-weight: 800;">Still have questions?
+                    </h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.2rem;">We are always here to help you fix
+                        your mood. Thank you for choosing Mood Fixer!</p>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank"
+                        class="btn-primary" style="display: inline-block; text-decoration: none;">Contact Support</a>
+                </div>
+
+                <a href="index.html" class="btn-secondary"
+                    style="margin-top: 2rem; display: inline-block; text-decoration: none;">Back to Mood Fixer</a>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bottom-footer">
+        <div class="footer-sections" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <div class="footer-section">
+                <h4 class="footer-section-title">Quick Links</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html" class="footer-link"> Home</a></li>
+                    <li><a href="index.html#step-identity" class="footer-link"> Get Started</a></li>
+                    <li><a href="index.html#step-mood" class="footer-link"> Pick Your Mood</a></li>
+                    <li><a href="tracking.html" class="footer-link"> Your Stats</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="footer-section-title">Support</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy.html" class="footer-link"> Privacy Policy</a></li>
+                    <li><a href="terms.html" class="footer-link"> Terms of Use</a></li>
+                    <li><a href="faq.html" class="footer-link"> FAQ</a></li>
+                    <li><a href="safety.html" class="footer-link"> Safety &amp; Crisis Help</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4 class="footer-section-title">Contact Us</h4>
+                <p class="footer-contact-text">Have a question? We'd love to hear from you.</p>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank"
+                    class="footer-email-btn">📧 Send an Email</a>
+            </div>
+        </div>
+
+        <div class="footer-copyright-strip">
+            <span>&copy; 2026 <strong>Mood Fixer</strong> &mdash; Made by P.R.K.I. Pallegama</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.glass-container');
+            if (container) {
+                container.classList.add('reveal-visible');
+            }
+
+            // Mobile Hamburger Menu Toggle
+            const hamburgerBtn = document.getElementById('nav-hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (hamburgerBtn && mobileMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    hamburgerBtn.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                });
+
+                const mobLinks = mobileMenu.querySelectorAll('.mob-link');
+                mobLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburgerBtn.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+            }
+
+            // Accordion Toggle
+            const headers = document.querySelectorAll('.accordion-header');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.closest('.accordion-item');
+                    const content = item.querySelector('.accordion-content');
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other accordion items
+                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        }
+                    });
+
+                    if (isActive) {
+                        item.classList.remove('active');
+                        content.style.maxHeight = null;
+                    } else {
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Fixer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="mood fix logo.png" alt="Mood Fixer Logo" class="nav-logo-img">
+                <span class="nav-brand">Mood Fixer</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" id="nav-home" class="active">Home</a></li>
+                <li><a href="#step-identity" id="nav-get-started">Get Started</a></li>
+                <li><a href="#step-mood" id="nav-pick-mood">Pick Mood</a></li>
+                <li><a href="#" id="nav-history">History</a></li>
+                <li><a href="tracking.html" id="nav-tracking">Stats</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com"
+                        target="_blank">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-nav-cta" id="nav-start-journey">Start Journey</button>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-hamburger" id="nav-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mob-link">Home</a></li>
+            <li><a href="index.html#step-identity" class="mob-link">Get Started</a></li>
+            <li><a href="index.html#step-mood" class="mob-link">Pick Mood</a></li>
+            <li><a href="tracking.html" class="mob-link">Stats</a></li>
+            <li><a href="safety.html" class="mob-link">Safety Help</a></li>
+            <li><a href="faq.html" class="mob-link">FAQ</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank">Contact</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Emotional Background Animation -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+
+    <div id="app" style="position: relative;">
+        <!-- Dashboard / Sidebar -->
+        <aside id="dashboard" class="collapsed">
+            <!-- Logo moved to fixed position outside dashboard -->
+            <div class="dash-header">
+                <h3>🕒 History</h3>
+                <div id="current-time">00:00:00</div>
+                <div id="current-date">Jan 1, 2024</div>
+            </div>
+            <div class="dash-content">
+                <h3>Your Mood Journal</h3>
+                <ul id="visit-list">
+                    <!-- Javascript will populate this -->
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <div class="glass-container reveal-stagger">
+                <header class="main-header">
+                    <img src="mood fix logo.png" alt="Mood Fixer Logo" class="title-logo" id="main-logo">
+                    <div class="header-text">
+                        <h1 class="gradient-text">Mood Fixer</h1>
+                        <p class="subtitle">Your daily dose of motivation, facts, and smiles.</p>
+                    </div>
+                </header>
+
+                <!-- Step 0: Welcome -->
+                <div id="step-welcome" class="step active reveal-stagger">
+                    <h2>Welcome to Mood Fixer</h2>
+                    <p>Your journey to a brighter day starts here.</p>
+                    <button id="btn-get-started" class="btn-primary">Get Started </button>
+                </div>
+
+                <!-- Step 1: Identity -->
+                <div id="step-identity" class="step hidden reveal-stagger">
+                    <h2>First, tell us a bit about you</h2>
+                    <p>How do you identify?</p>
+                    <div class="options-grid">
+                        <div class="btn-option-card" data-identity="Female">
+                            <span class="card-icon">👩</span>
+                            <span class="card-title">Female</span>
+                        </div>
+                        <div class="btn-option-card" data-identity="Male">
+                            <span class="card-icon">👨</span>
+                            <span class="card-title">Male</span>
+                        </div>
+                        <div class="btn-option-card" data-identity="Transgender">
+                            <span class="card-icon">🏳️‍⚧️</span>
+                            <span class="card-title">Transgender</span>
+                        </div>
+                        <div class="btn-option-card" data-identity="Other">
+                            <span class="card-icon">🏳️‍🌈</span>
+                            <span class="card-title">Other</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Mood -->
+                <div id="step-mood" class="step hidden reveal-stagger">
+                    <h2>How are you feeling right now?</h2>
+                    <p>Select an emoji or type it out!</p>
+                    <div class="options-grid mood-grid">
+                        <button class="btn-option emoji-btn" data-mood="Happy">😊 Happy</button>
+                        <button class="btn-option emoji-btn" data-mood="Sad">😢 Sad</button>
+                        <button class="btn-option emoji-btn" data-mood="Sleepy">😴 Sleeping time</button>
+                        <button class="btn-option emoji-btn" data-mood="Waking Up">🌅 Waking up</button>
+                        <button class="btn-option emoji-btn" data-mood="Normal">😐 Normal time</button>
+                        <button class="btn-option emoji-btn" data-mood="Anxious">😰 Anxious</button>
+                        <button class="btn-option emoji-btn" data-mood="Angry">😠 Angry</button>
+                        <button class="btn-option emoji-btn" data-mood="Tired">😴 Tired</button>
+                        <button class="btn-option emoji-btn" data-mood="Lovely">🥰 Lovely</button>
+                        <button class="btn-option emoji-btn" data-mood="generic">🤷 No idea</button>
+                    </div>
+                    <div class="text-input-group">
+                        <input type="text" id="custom-mood" placeholder="Or describe your mood in words...">
+                    </div>
+                    <button id="btn-submit-mood" class="btn-primary">Fix My Mood! 🚀</button>
+                </div>
+
+                <!-- Step 3: Result -->
+                <div id="step-result" class="step hidden reveal-stagger">
+                    <h2>Here is something just for you!</h2>
+                    <div class="result-card"
+                        style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                        <span id="result-badge" class="result-badge hidden-element"></span>
+                        <p id="result-text">...</p>
+                        <button id="btn-copy-result" class="btn-copy">📋 Copy Message</button>
+                    </div>
+                    <button id="btn-restart" class="btn-secondary">Give me another one!</button>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <!-- Bottom Footer -->
+    <footer class="bottom-footer">
+
+        <!-- Photo Gallery Section -->
+        <section class="footer-gallery reveal">
+            <div class="gallery-container">
+                <div class="gallery-header">
+                    <h2 class="gallery-title"> Visual Inspiration</h2>
+                    <p class="gallery-subtitle">A glimpse into moments of peace, joy, and nature.</p>
+                </div>
+                <div class="footer-photo-grid reveal-stagger">
+                    <div class="gallery-item">
+                        <img src="peaceful_landscape.png" alt="Peaceful Landscape" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">Peace</span>
+                            <p class="gallery-description">Find serenity in the quiet whispers of the hills and the calm
+                                of the water.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="joyful_moment.png" alt="Joyful Moment" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">Joy</span>
+                            <p class="gallery-description">Celebrate the small wins and big laughs that fill your heart
+                                with light.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="cozy_atmosphere.png" alt="Cozy Atmosphere" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">Comfort</span>
+                            <p class="gallery-description">Wrap yourself in warmth and let the soft glow of comfort
+                                soothe your soul.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="inspiring_nature.png" alt="Inspiring Nature" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">Nature</span>
+                            <p class="gallery-description">Discover the magic in every leaf and the strength in every
+                                mountain peak.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full-width Message Banner -->
+        <div class="footer-message-banner reveal">
+            <h2 class="footer-msg-title">A Message from the Heart of Mood Fixer</h2>
+            <div class="footer-msg-body">
+                <p>Life can feel really tough sometimes. You don't have to deal with it by yourself. Mood Fixer is here
+                    to help. We want to meet you where you're right now and help you feel better.</p>
+                <p>Whether you're starting a day, getting ready for bed, or just need something to brighten up a tough
+                    moment — we're here. One message at a time.</p>
+                <p>We use a mix of technology and human emotion to spark something in you. A small smile, a boost of
+                    energy, or a funny moment can make a real difference. This is more than a website. It's a place
+                    where you can feel safe and supported.</p>
+            </div>
+            <blockquote class="footer-quote">
+                "We think that the right words, at the right time, can really change how you feel. And even change your
+                life."
+                <cite>— Created by Mood Fixer Project Team</cite>
+            </blockquote>
+
+            <div class="footer-why-matters">
+                <h3 class="footer-why-title"> Why Mood Fixer Matters</h3>
+                <ul class="footer-features-grid">
+                    <li><strong> Instant Connection</strong><br>Tell us how you're feeling with emojis or honest words.
+                    </li>
+                    <li><strong> Pure Impact</strong><br>Short and sweet — a sentence or two that can make a big
+                        difference.</li>
+                    <li><strong> Brighter Perspective</strong><br>We want you to leave feeling better and happier
+                        every time.</li>
+                    <li><strong> Your Journey, Honored</strong><br>We care about your progress and celebrate every day
+                        you choose happiness.</li>
+                </ul>
+            </div>
+
+            <div class="footer-disclaimer">
+                <p class="footer-disclaimer-text">⚠️ Mood Fixer is here to support your spirit with positivity and
+                    humor. This site is for motivational purposes only. We are not responsible for personal actions or
+                    medical emergencies. <strong>If you are in crisis, please seek professional help immediately. Your
+                        life is valuable.</strong></p>
+            </div>
+
+            <p class="footer-growing-note">"This is only the beginning! Mood Fixer is constantly growing with new
+                datasets, more motivation, and fresh surprises. We are building a better experience every day."</p>
+        </div>
+
+        <!-- Divider -->
+        <div class="footer-divider"></div>
+
+        <div class="footer-sections reveal-stagger">
+
+            <!-- Section 1: Brand / About -->
+            <div class="footer-section">
+                <div class="footer-section-brand">
+
+                    <span class="footer-brand-name">Mood Fixer</span>
+                </div>
+                <p class="footer-about-text">Your daily companion for positivity, motivation, and smiles. We meet you
+                    where you are and help you feel a little better — one message at a time.</p>
+                <p class="footer-tagline"> You are not alone.</p>
+            </div>
+
+            <!-- Section 2: Quick Links -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Quick Links</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="#" id="footer-home" class="footer-link"> Home</a></li>
+                    <li><a href="#step-identity" id="footer-get-started" class="footer-link"> Get Started</a></li>
+                    <li><a href="#step-mood" id="footer-pick-mood" class="footer-link"> Pick Your Mood</a></li>
+                    <li><a href="#step-result" id="footer-result" class="footer-link"> Your Result</a></li>
+                    <li><a href="tracking.html" id="footer-tracking" class="footer-link"> Your Stats</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 3: Support -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Support</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy.html" class="footer-link"> Privacy Policy</a></li>
+                    <li><a href="terms.html" class="footer-link"> Terms of Use</a></li>
+                    <li><a href="faq.html" class="footer-link"> FAQ</a></li>
+                    <li><a href="safety.html" class="footer-link"> Safety &amp; Crisis Help</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 4: Contact -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Contact Us</h4>
+                <p class="footer-contact-text">Have a question or feedback? We'd love to hear from you.</p>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank"
+                    class="footer-email-btn">📧 Send an Email</a>
+                <p class="footer-contact-note">We usually respond within 24–48 hours.</p>
+            </div>
+
+        </div>
+
+        <!-- Copyright Strip -->
+        <div class="footer-copyright-strip">
+            <span>&copy; 2026 <strong>Mood Fixer</strong> &mdash; Made with by P.R.K.I. Pallegama</span>
+            <span class="footer-powered">Powered by the Mood Fixer Project Team &amp; Gemini AI</span>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

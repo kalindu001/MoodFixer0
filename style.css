@@ -63,6 +63,9 @@ body {
     opacity: 0.6;
     animation: floatOrb 20s infinite ease-in-out alternate;
     mix-blend-mode: screen;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 .orb-1 {
@@ -111,22 +114,22 @@ body {
     background: #ffd1ff;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate3d(-50%, -50%, 0);
     animation-duration: 20s;
 }
 
 @keyframes floatOrb {
     0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
     }
     33% {
-        transform: translate(50px, -50px) scale(1.2) rotate(10deg);
+        transform: translate3d(50px, -50px, 0) scale(1.2) rotate(10deg);
     }
     66% {
-        transform: translate(-30px, 40px) scale(0.9) rotate(-5deg);
+        transform: translate3d(-30px, 40px, 0) scale(0.9) rotate(-5deg);
     }
     100% {
-        transform: translate(20px, 60px) scale(1.1) rotate(5deg);
+        transform: translate3d(20px, 60px, 0) scale(1.1) rotate(5deg);
     }
 }
 
@@ -322,7 +325,8 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.8s var(--ease-premium), opacity 0.8s var(--ease-premium), filter 0.8s var(--ease-premium);
+    transition: transform 0.8s var(--ease-premium), opacity 0.8s var(--ease-premium);
+    will-change: transform, opacity;
 }
 
 .glass-container.glass-entry {
@@ -399,7 +403,8 @@ header.main-header {
 
 /* Steps */
 .step {
-    transition: opacity 0.6s var(--ease-premium), transform 0.6s var(--ease-premium), filter 0.6s var(--ease-premium);
+    transition: opacity 0.6s var(--ease-premium), transform 0.6s var(--ease-premium);
+    will-change: transform, opacity;
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
@@ -1855,12 +1860,64 @@ header.main-header {
     }
 }
 
-/* Media Query Nav overrides */
+/* Media Query Nav overrides & Mobile Performance Optimizations */
 @media (max-width: 768px) {
     .nav-hamburger {
         display: flex;
     }
     .top-nav .nav-links, .top-nav .nav-actions {
         display: none;
+    }
+
+    /* Disable heavy background gradient animating position on mobile body */
+    body {
+        animation: none !important;
+        background-size: 100% 100% !important;
+        background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%) !important;
+    }
+
+    /* Optimize heavy decorative floating orbs for mobile */
+    .orb-3, .orb-4, .orb-5 {
+        display: none !important;
+    }
+    .orb-1, .orb-2 {
+        animation: none !important; /* Stop animating position */
+        filter: blur(40px) !important; /* Reduce blur size to be cheaper on mobile GPU */
+        mix-blend-mode: normal !important; /* Screen mix-blend-mode is heavy, normal is instant */
+        opacity: 0.25 !important;
+    }
+
+    /* Reduce heavy backdrop-filter blur radii on mobile for standard-compliant smoothness */
+    #dashboard {
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+    .glass-container {
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+    .top-nav {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+    .mobile-menu-overlay {
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+    }
+    .btn-option-card {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+    .stat-card {
+        backdrop-filter: blur(8px) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+    }
+
+    /* Simplify scroll reveal transitions to avoid CPU lag during scroll */
+    .reveal {
+        transition: transform 0.4s ease, opacity 0.4s ease !important;
+    }
+    .reveal-stagger > * {
+        transition: transform 0.3s ease, opacity 0.3s ease !important;
     }
 }

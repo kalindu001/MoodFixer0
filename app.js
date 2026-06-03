@@ -427,14 +427,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let count = parseInt(localStorage.getItem('moodFixerResultCount') || '0') + 1;
         localStorage.setItem('moodFixerResultCount', count.toString());
 
-        // Determine which set to pick from
-        // cycleIndex goes 0, 1, 2, 3:
-        // 0 -> 1st -> Motivation/Fact
-        // 1 -> 2nd -> Motivation/Fact
-        // 2 -> 3rd -> Joke
-        // 3 -> 4th -> Joke
-        const cycleIndex = (count - 1) % 4;
-        const wantsJoke = (cycleIndex === 2 || cycleIndex === 3);
+        // Determine which set to pick from (strict alternation):
+        // Odd count  (1st, 3rd, 5th…) -> Motivation / Fact first
+        // Even count (2nd, 4th, 6th…) -> Joke second
+        const wantsJoke = (count % 2 === 0);
 
         let selectedResponse = '';
         let finalType = 'motivation';

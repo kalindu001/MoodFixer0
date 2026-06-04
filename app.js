@@ -282,6 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Note: AI Configuration is now managed in a separate page (ai.html).
+
     // Get Started Button in Welcome Step → go to identity step
     const btnGetStarted = document.getElementById('btn-get-started');
     btnGetStarted.addEventListener('click', () => {
@@ -391,12 +393,197 @@ document.addEventListener('DOMContentLoaded', () => {
                    .trim();
     }
 
-    function generateAIResponse() {
+    async function generateAIResponse() {
+        const mode = localStorage.getItem('moodFixerAIMode') || 'local';
+        
+        const resultTextElem = document.getElementById('result-text');
+        const badge = document.getElementById('result-badge');
+        
+        if (badge) {
+            badge.className = 'result-badge hidden-element';
+        }
+        resultTextElem.textContent = '🧠 AI is thinking...';
+
+        // Increment the results counter here so it is synchronized
+        let count = parseInt(localStorage.getItem('moodFixerResultCount') || '0') + 1;
+        localStorage.setItem('moodFixerResultCount', count.toString());
+        const wantsJoke = (count % 2 === 0);
+        
+        if (mode !== 'local') {
+            let key = '';
+            let model = '';
+            let baseUrl = '';
+
+            if (mode === 'deepseek') {
+                key = localStorage.getItem('moodFixerDeepseekKey') || localStorage.getItem('moodFixerKey_deepseek') || '';
+                model = localStorage.getItem('moodFixerModel_deepseek') || localStorage.getItem('moodFixerAIModel') || 'deepseek-chat';
+                baseUrl = localStorage.getItem('moodFixerUrl_deepseek') || 'https://api.deepseek.com';
+            } else if (mode === 'free-ai') {
+                key = '';
+                model = localStorage.getItem('moodFixerModel_free-ai') || 'openai';
+                baseUrl = 'https://text.pollinations.ai';
+            } else if (mode === 'openai') {
+                key = localStorage.getItem('moodFixerKey_openai') || '';
+                model = localStorage.getItem('moodFixerModel_openai') || 'gpt-4o-mini';
+                baseUrl = localStorage.getItem('moodFixerUrl_openai') || 'https://api.openai.com/v1';
+            } else if (mode === 'gemini') {
+                key = localStorage.getItem('moodFixerKey_gemini') || '';
+                model = localStorage.getItem('moodFixerModel_gemini') || 'gemini-1.5-flash';
+                baseUrl = localStorage.getItem('moodFixerUrl_gemini') || 'https://generativelanguage.googleapis.com/v1beta/openai';
+            } else if (mode === 'groq') {
+                key = localStorage.getItem('moodFixerKey_groq') || '';
+                model = localStorage.getItem('moodFixerModel_groq') || 'llama-3.3-70b-versatile';
+                baseUrl = localStorage.getItem('moodFixerUrl_groq') || 'https://api.groq.com/openai/v1';
+            } else if (mode === 'openrouter') {
+                key = localStorage.getItem('moodFixerKey_openrouter') || '';
+                model = localStorage.getItem('moodFixerModel_openrouter') || 'google/gemma-2-9b-it:free';
+                baseUrl = localStorage.getItem('moodFixerUrl_openrouter') || 'https://openrouter.ai/api/v1';
+            } else if (mode === 'custom') {
+                key = localStorage.getItem('moodFixerKey_custom') || '';
+                model = localStorage.getItem('moodFixerModel_custom') || '';
+                baseUrl = localStorage.getItem('moodFixerUrl_custom') || '';
+            }
+
+            if (mode !== 'free-ai' && !key) {
+                console.warn(`No API key provided for engine: ${mode}, falling back to local database.`);
+                generateLocalAIResponse(wantsJoke);
+                return;
+            }
+
+            try {
+                const identity = userState.identity || 'Not specified';
+                const mood = userState.moodEmoji || 'Normal';
+                const details = userState.moodText.trim();
+                
+                let prompt = `User identity: ${identity}. User mood: ${mood}.`;
+                if (details) {
+                    prompt += ` Custom details: "${details}"`;
+                }
+
+                // Get prompt style and model settings from localStorage
+                let style = localStorage.getItem('moodFixerAIPromptStyle') || 'compassionate';
+                const customPrompt = localStorage.getItem('moodFixerAICustomPrompt') || '';
+                
+                // If it is a joke turn, force humorous style
+                if (wantsJoke) {
+                    style = 'humorous';
+                } else {
+                    // Otherwise, if the configured style is humorous, fall back to compassionate on non-joke turns
+                    if (style === 'humorous') {
+                        style = 'compassionate';
+                    }
+                }
+                
+                let systemPrompt = '';
+                if (style === 'custom' && customPrompt) {
+                    systemPrompt = customPrompt;
+                } else if (style === 'humorous') {
+                    systemPrompt = 'You are Mood Fixer, a funny and lighthearted companion. Generate a short, highly personalized response (exactly 1 to 2 sentences) containing a hilarious joke or witty comment to cheer the user up based on their identity and how they feel. Make it safe and positive. Start your response with one of these three tags: "Motivation: ", "Fact: ", or "Joke: " depending on what suits the joke best.';
+                } else if (style === 'fact-oriented') {
+                    systemPrompt = 'You are Mood Fixer, an inspiring intellectual companion. Generate a short, highly personalized response (exactly 1 to 2 sentences) containing a fascinating, little-known scientific, natural, or historical fact that brings wonder and inspiration to the user based on their identity and mood. Start your response with one of these three tags: "Motivation: ", "Fact: ", or "Joke: " depending on the content.';
+                } else if (style === 'philosophic') {
+                    systemPrompt = 'You are Mood Fixer, a reflective and philosophical guide. Generate a short, highly personalized response (exactly 1 to 2 sentences) containing deep philosophical wisdom, Stoic reflection, or calm perspective to help ground the user based on their identity and mood. Keep it uplifting. Start your response with one of these three tags: "Motivation: ", "Fact: ", or "Joke: " depending on the content.';
+                } else {
+                    // compassionate (default)
+                    systemPrompt = 'You are Mood Fixer, a highly compassionate and uplifting AI companion. Generate a short, highly personalized response (exactly 1 to 2 sentences) to help improve the user\'s mood based on their identity and how they feel. Make it warm, empathetic, and uniquely tailored. Start your response with one of these three tags: "Motivation: ", "Fact: ", or "Joke: " depending on the content.';
+                }
+                
+                let aiResult = '';
+                
+                if (mode === 'free-ai') {
+                    // Call Pollinations GET endpoint keylessly
+                    const url = `https://text.pollinations.ai/${encodeURIComponent(prompt)}?system=${encodeURIComponent(systemPrompt)}&model=${model}`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`Pollinations AI error: ${response.statusText}`);
+                    }
+                    aiResult = await response.text();
+                } else {
+                    // OpenAI-compatible POST completions call
+                    const url = `${baseUrl.replace(/\/+$/, '')}/chat/completions`;
+                    const headers = {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${key}`
+                    };
+                    
+                    if (mode === 'openrouter') {
+                        headers['HTTP-Referer'] = 'https://moodfixer.com';
+                        headers['X-Title'] = 'Mood Fixer';
+                    }
+                    
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: headers,
+                        body: JSON.stringify({
+                            model: model,
+                            messages: [
+                                { role: 'system', content: systemPrompt },
+                                { role: 'user', content: prompt }
+                            ],
+                            temperature: 0.7,
+                            max_tokens: 150
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        const errData = await response.json().catch(() => ({}));
+                        const errMsg = errData.error?.message || response.statusText || 'Unknown error';
+                        throw new Error(errMsg);
+                    }
+                    
+                    const data = await response.json();
+                    aiResult = data.choices[0].message.content;
+                }
+                
+                aiResult = aiResult.trim();
+                let responseType = 'motivation';
+                let cleanText = aiResult;
+                
+                // Match prefix (e.g. "Joke:", "**Motivation**:", "Fact -") case-insensitively
+                const prefixMatch = aiResult.match(/^\*?\*?(joke|motivation|fact)\*?\*?[:-\s]+/i);
+                if (prefixMatch) {
+                    responseType = prefixMatch[1].toLowerCase();
+                    cleanText = aiResult.substring(prefixMatch[0].length).trim();
+                } else {
+                    const lowerResult = aiResult.toLowerCase();
+                    if (lowerResult.includes('joke') || lowerResult.includes('why did') || lowerResult.includes('what do you call')) {
+                        responseType = 'joke';
+                    } else if (lowerResult.includes('fact') || lowerResult.includes('did you know')) {
+                        responseType = 'fact';
+                    }
+                }
+                
+                cleanText = cleanText.replace(/^[-\s:]+/, '').trim();
+                resultTextElem.textContent = cleanText;
+                
+                if (badge) {
+                    badge.className = 'result-badge';
+                    badge.classList.remove('hidden-element');
+                    if (responseType === 'joke') {
+                        badge.innerHTML = '😂 Joke';
+                        badge.classList.add('badge-joke');
+                    } else if (responseType === 'fact') {
+                        badge.innerHTML = '💡 Fact';
+                        badge.classList.add('badge-fact');
+                    } else {
+                        badge.innerHTML = '💪 Motivation';
+                        badge.classList.add('badge-motivation');
+                    }
+                }
+                return;
+            } catch (error) {
+                console.error(`${mode} AI generation failed, falling back to local database:`, error);
+            }
+        }
+        
+        generateLocalAIResponse(wantsJoke);
+    }
+
+    function generateLocalAIResponse(wantsJoke) {
         let category = 'generic';
         let text = userState.moodText.toLowerCase();
         let emoji = userState.moodEmoji;
 
-        // Simple NLP logic
         if (text.includes('sad') || text.includes('cry') || text.includes('depress') || emoji === 'Sad') {
             category = 'sad';
         } else if (text.includes('happy') || text.includes('joy') || text.includes('good') || emoji === 'Happy') {
@@ -419,18 +606,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const responses = knowledgeBase[category] || knowledgeBase.generic;
 
-        // Separate current category into jokes and motivations/facts
         const jokes = responses.filter(r => getResponseType(r) === 'joke');
         const motivationsAndFacts = responses.filter(r => getResponseType(r) !== 'joke');
 
-        // Retrieve and increment the result counter
-        let count = parseInt(localStorage.getItem('moodFixerResultCount') || '0') + 1;
-        localStorage.setItem('moodFixerResultCount', count.toString());
-
-        // Determine which set to pick from (strict alternation):
-        // Odd count  (1st, 3rd, 5th…) -> Motivation / Fact first
-        // Even count (2nd, 4th, 6th…) -> Joke second
-        const wantsJoke = (count % 2 === 0);
+        if (wantsJoke === undefined) {
+            let count = parseInt(localStorage.getItem('moodFixerResultCount') || '0');
+            wantsJoke = (count % 2 === 0);
+        }
 
         let selectedResponse = '';
         let finalType = 'motivation';
@@ -440,7 +622,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedResponse = jokes[Math.floor(Math.random() * jokes.length)];
                 finalType = 'joke';
             } else {
-                // fallback to anything
                 selectedResponse = responses[Math.floor(Math.random() * responses.length)];
                 finalType = getResponseType(selectedResponse);
             }
@@ -449,7 +630,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedResponse = motivationsAndFacts[Math.floor(Math.random() * motivationsAndFacts.length)];
                 finalType = getResponseType(selectedResponse);
             } else {
-                // fallback to anything
                 selectedResponse = responses[Math.floor(Math.random() * responses.length)];
                 finalType = getResponseType(selectedResponse);
             }
@@ -458,10 +638,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const cleanText = cleanResponseText(selectedResponse);
         document.getElementById('result-text').textContent = cleanText;
 
-        // Update badge visual
         const badge = document.getElementById('result-badge');
         if (badge) {
-            badge.className = 'result-badge'; // Reset classes
+            badge.className = 'result-badge';
             badge.classList.remove('hidden-element');
 
             if (finalType === 'joke') {

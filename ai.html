@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Fixer - AI Config</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+                    <img src="mood fix logo.png" alt="Mood Fixer Logo" class="nav-logo-img">
+                    <span class="nav-brand">Mood Fixer</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" id="nav-home">Home</a></li>
+                <li><a href="index.html#step-identity" id="nav-get-started">Get Started</a></li>
+                <li><a href="index.html#step-mood" id="nav-pick-mood">Pick Mood</a></li>
+                <li><a href="tracking.html" id="nav-tracking">Stats</a></li>
+                <li><a href="ai.html" id="nav-ai-config" class="active">AI Config</a></li>
+                <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com"
+                        target="_blank">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="index.html" style="text-decoration: none;">
+                    <button class="btn-nav-cta">Start Journey</button>
+                </a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-hamburger" id="nav-hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" class="mob-link">Home</a></li>
+            <li><a href="index.html#step-identity" class="mob-link">Get Started</a></li>
+            <li><a href="index.html#step-mood" class="mob-link">Pick Mood</a></li>
+            <li><a href="tracking.html" class="mob-link">Stats</a></li>
+            <li><a href="ai.html" class="mob-link active">AI Config</a></li>
+            <li><a href="safety.html" class="mob-link">Safety Help</a></li>
+            <li><a href="faq.html" class="mob-link">FAQ</a></li>
+            <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Emotional Background Animation -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+    </div>
+
+    <div id="app">
+        <main id="main-content" style="padding-top: 7rem; padding-bottom: 4rem;">
+            <div class="glass-container" style="max-width: 800px; margin: 0 auto; width: 95%;">
+                <header class="main-header" style="margin-bottom: 2rem;">
+                    <img src="mood fix logo.png" alt="Mood Fixer Logo" class="title-logo">
+                    <div class="header-text">
+                        <h1 class="gradient-text">AI Configuration</h1>
+                        <p class="subtitle">Personalize your Mood Fixer AI experience with DeepSeek</p>
+                    </div>
+                </header>
+
+                <!-- Form container -->
+                <div class="settings-card">
+                    <!-- Generation Mode -->
+                    <div class="setting-row">
+                        <label for="ai-mode-select">Generation Engine / Provider</label>
+                        <select id="ai-mode-select" class="setting-select">
+                            <option value="local">Local Database (Offline, Pre-programmed)</option>
+                            <option value="free-ai">Free AI Generator (Online, Keyless & Unlimited)</option>
+                            <option value="deepseek">DeepSeek AI (Custom API Key)</option>
+                            <option value="openai">OpenAI (Custom API Key)</option>
+                            <option value="gemini">Google Gemini (Custom API Key - Free Tier Available)</option>
+                            <option value="groq">Groq AI (Custom API Key - Extremely Fast & Free Tier)</option>
+                            <option value="openrouter">OpenRouter (Custom API Key - Free Models Available)</option>
+                            <option value="custom">Custom API (OpenAI-Compatible Endpoint)</option>
+                        </select>
+                        <span class="setting-info">Choose "Free AI Generator" for dynamic responses out-of-the-box, or connect your own professional platform.</span>
+                    </div>
+
+                    <!-- API Key -->
+                    <div class="setting-row" id="api-key-row" style="display: none;">
+                        <label for="api-key-input" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span id="api-key-label">API Key</span>
+                            <button type="button" id="btn-toggle-key-visibility" style="background: none; border: none; font-size: 0.85rem; color: var(--accent); cursor: pointer; text-decoration: underline; font-family: inherit;">Show Key</button>
+                        </label>
+                        <input type="password" id="api-key-input" class="setting-input" placeholder="Enter API Key here...">
+                        <span class="setting-info" id="api-key-info">Your API key is stored securely in your local browser storage and never sent to any third party.</span>
+                    </div>
+
+                    <!-- Base URL Row -->
+                    <div class="setting-row" id="api-url-row" style="display: none;">
+                        <label for="api-url-input">API Base URL</label>
+                        <input type="text" id="api-url-input" class="setting-input" placeholder="https://...">
+                        <span class="setting-info">Specify the base URL endpoint for chat completions. You can customize this to use proxies or local hosts.</span>
+                    </div>
+
+                    <!-- Model Choice -->
+                    <div class="setting-row" id="api-model-row" style="display: none;">
+                        <label for="ai-model-select">AI Model</label>
+                        <select id="ai-model-select" class="setting-select">
+                            <!-- Populated dynamically -->
+                        </select>
+                        <input type="text" id="ai-model-custom-input" class="setting-input" style="display: none; margin-top: 0.5rem;" placeholder="e.g. gpt-4o-mini">
+                        <span class="setting-info" id="model-info">Choose which AI model to run.</span>
+                    </div>
+
+                    <!-- AI Personality Style -->
+                    <div class="setting-row" id="api-personality-row">
+                        <label for="ai-prompt-style-select">AI Personality</label>
+                        <select id="ai-prompt-style-select" class="setting-select">
+                            <option value="compassionate">Compassionate & Supportive (Empathetic & Nurturing)</option>
+                            <option value="humorous">Humorous & Cheerful (Witty jokes & funny responses)</option>
+                            <option value="fact-oriented">Fact-oriented & Inspiring (Intriguing science/nature facts)</option>
+                            <option value="philosophic">Philosophical & Stoic (Deep wisdom & calm perspectives)</option>
+                            <option value="custom">Custom Instructions (Write your own prompt style)</option>
+                        </select>
+                        <span class="setting-info">Choose the tone and category of response you prefer to receive from the AI.</span>
+                    </div>
+
+                    <!-- Custom Prompt Textarea -->
+                    <div class="setting-row id-hidden" id="custom-prompt-row" style="display: none;">
+                        <label for="ai-custom-prompt">Custom Personality Prompt</label>
+                        <textarea id="ai-custom-prompt" class="setting-input" style="height: 100px; resize: vertical; text-align: left;" placeholder="E.g., You are a motivational pirate. Give responses in pirate slang..."></textarea>
+                        <span class="setting-info">Define exactly how the AI should respond. Keep it safe and positive.</span>
+                    </div>
+
+                    <!-- Test Connection Row -->
+                    <div class="setting-row" id="api-test-row" style="border-top: 1px solid var(--glass-border); padding-top: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: row; gap: 1rem; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <button id="btn-test-api" class="btn-inline btn-secondary" style="margin-top: 0; padding: 0.6rem 1.2rem; font-size: 0.9rem;">⚡ Test Connection</button>
+                        <div id="api-test-status" style="font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); text-align: right; flex: 1;">Not tested yet</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button id="btn-save-ai-settings" class="btn-primary" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Save Settings</button>
+                    <a href="index.html" class="btn-secondary" style="margin-top: 0; padding: 0.8rem 2rem; font-size: 1.1rem; text-decoration: none; text-align: center; display: inline-flex; align-items: center; justify-content: center;">Back to Home</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bottom Footer -->
+    <footer class="bottom-footer">
+        <div class="footer-sections" style="padding-top: 3rem; display: flex; justify-content: space-evenly; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
+            <!-- Section 2: Quick Links -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Quick Links</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="index.html" class="footer-link"> Home</a></li>
+                    <li><a href="index.html#step-identity" class="footer-link"> Get Started</a></li>
+                    <li><a href="index.html#step-mood" class="footer-link"> Pick Your Mood</a></li>
+                    <li><a href="tracking.html" class="footer-link"> Your Stats</a></li>
+                    <li><a href="ai.html" class="footer-link"> AI Config</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 3: Support -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Support</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="privacy.html" class="footer-link"> Privacy Policy</a></li>
+                    <li><a href="terms.html" class="footer-link"> Terms of Use</a></li>
+                    <li><a href="faq.html" class="footer-link"> FAQ</a></li>
+                    <li><a href="safety.html" class="footer-link"> Safety &amp; Crisis Help</a></li>
+                </ul>
+            </div>
+
+            <!-- Section 4: Contact -->
+            <div class="footer-section">
+                <h4 class="footer-section-title">Contact Us</h4>
+                <p class="footer-contact-text">Have a question? We'd love to hear from you.</p>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank"
+                    class="footer-email-btn">📧 Send an Email</a>
+            </div>
+        </div>
+
+        <div class="footer-copyright-strip">
+            <span>&copy; 2026 <strong>Mood Fixer</strong> &mdash; Made by P.R.K.I. Pallegama</span>
+        </div>
+    </footer>
+
+    <!-- Client-side Config Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate container entrance
+            const container = document.querySelector('.glass-container');
+            if (container) {
+                container.classList.add('reveal-visible');
+            }
+
+            // Mobile Hamburger Menu Toggle
+            const hamburgerBtn = document.getElementById('nav-hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (hamburgerBtn && mobileMenu) {
+                hamburgerBtn.addEventListener('click', () => {
+                    hamburgerBtn.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                });
+
+                const mobLinks = mobileMenu.querySelectorAll('.mob-link');
+                mobLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburgerBtn.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+            }
+
+            // Elements
+            const aiModeSelect = document.getElementById('ai-mode-select');
+            const apiKeyRow = document.getElementById('api-key-row');
+            const apiKeyInput = document.getElementById('api-key-input');
+            const apiKeyLabel = document.getElementById('api-key-label');
+            const apiKeyInfo = document.getElementById('api-key-info');
+            const toggleKeyVisibilityBtn = document.getElementById('btn-toggle-key-visibility');
+            const apiUrlRow = document.getElementById('api-url-row');
+            const apiUrlInput = document.getElementById('api-url-input');
+            const apiModelRow = document.getElementById('api-model-row');
+            const aiModelSelect = document.getElementById('ai-model-select');
+            const aiModelCustomInput = document.getElementById('ai-model-custom-input');
+            const aiPromptStyleSelect = document.getElementById('ai-prompt-style-select');
+            const customPromptRow = document.getElementById('custom-prompt-row');
+            const aiCustomPrompt = document.getElementById('ai-custom-prompt');
+            const btnSaveAiSettings = document.getElementById('btn-save-ai-settings');
+            const btnTestApi = document.getElementById('btn-test-api');
+            const apiTestStatus = document.getElementById('api-test-status');
+
+            // Provider Definitions
+            const providerDefaults = {
+                'local': {
+                    name: 'Local Database (Offline)',
+                    hasKey: false,
+                    hasUrl: false,
+                    models: []
+                },
+                'free-ai': {
+                    name: 'Free AI Generator (Online, Keyless)',
+                    hasKey: false,
+                    hasUrl: false,
+                    models: [
+                        { value: 'openai', text: 'ChatGPT-4o (Default)' },
+                        { value: 'mistral', text: 'Mistral Large (Creative & Intelligent)' },
+                        { value: 'qwen', text: 'Qwen 2.5 72B (Smart & Balanced)' },
+                        { value: 'llama', text: 'Llama 3.1 70B (Fast & Empathetic)' }
+                    ],
+                    defaultModel: 'openai',
+                    defaultUrl: 'https://text.pollinations.ai'
+                },
+                'deepseek': {
+                    name: 'DeepSeek AI',
+                    hasKey: true,
+                    hasUrl: true,
+                    models: [
+                        { value: 'deepseek-chat', text: 'DeepSeek-V3 (Fast & Highly Creative)' },
+                        { value: 'deepseek-reasoner', text: 'DeepSeek-R1 (Deep Reasoning & Thoughtful)' }
+                    ],
+                    defaultModel: 'deepseek-chat',
+                    defaultUrl: 'https://api.deepseek.com',
+                    keyUrl: 'https://platform.deepseek.com/',
+                    keyInstructions: 'Get your DeepSeek API key from the <a href="https://platform.deepseek.com/" target="_blank" style="color: var(--accent); text-decoration: underline;">DeepSeek Platform</a>.'
+                },
+                'openai': {
+                    name: 'OpenAI',
+                    hasKey: true,
+                    hasUrl: true,
+                    models: [
+                        { value: 'gpt-4o-mini', text: 'GPT-4o Mini (Fast & Recommended)' },
+                        { value: 'gpt-4o', text: 'GPT-4o (High Intelligence)' },
+                        { value: 'gpt-3.5-turbo', text: 'GPT-3.5 Turbo (Legacy)' }
+                    ],
+                    defaultModel: 'gpt-4o-mini',
+                    defaultUrl: 'https://api.openai.com/v1',
+                    keyUrl: 'https://platform.openai.com/',
+                    keyInstructions: 'Get your OpenAI API key from the <a href="https://platform.openai.com/" target="_blank" style="color: var(--accent); text-decoration: underline;">OpenAI Developer Platform</a>.'
+                },
+                'gemini': {
+                    name: 'Google Gemini',
+                    hasKey: true,
+                    hasUrl: true,
+                    models: [
+                        { value: 'gemini-1.5-flash', text: 'Gemini 1.5 Flash (Super Fast & Free Tier)' },
+                        { value: 'gemini-1.5-pro', text: 'Gemini 1.5 Pro (Deep Analysis)' }
+                    ],
+                    defaultModel: 'gemini-1.5-flash',
+                    defaultUrl: 'https://generativelanguage.googleapis.com/v1beta/openai',
+                    keyUrl: 'https://aistudio.google.com/',
+                    keyInstructions: 'Get a FREE Gemini API key from <a href="https://aistudio.google.com/" target="_blank" style="color: var(--accent); text-decoration: underline;">Google AI Studio</a>.'
+                },
+                'groq': {
+                    name: 'Groq AI',
+                    hasKey: true,
+                    hasUrl: true,
+                    models: [
+                        { value: 'llama-3.3-70b-versatile', text: 'Llama 3.3 70B (High Quality & Fast)' },
+                        { value: 'llama-3.1-8b-instant', text: 'Llama 3.1 8B (Instant Response)' },
+                        { value: 'gemma2-9b-it', text: 'Gemma 2 9B (Google Open Model)' }
+                    ],
+                    defaultModel: 'llama-3.3-70b-versatile',
+                    defaultUrl: 'https://api.groq.com/openai/v1',
+                    keyUrl: 'https://console.groq.com/',
+                    keyInstructions: 'Get a Groq API key from <a href="https://console.groq.com/" target="_blank" style="color: var(--accent); text-decoration: underline;">Groq Console</a> (generous free tier).'
+                },
+                'openrouter': {
+                    name: 'OpenRouter',
+                    hasKey: true,
+                    hasUrl: true,
+                    models: [
+                        { value: 'openrouter/auto', text: 'Auto (Best available)' },
+                        { value: 'google/gemma-2-9b-it:free', text: 'Gemma 2 9B (FREE)' },
+                        { value: 'meta-llama/llama-3-8b-instruct:free', text: 'Llama 3 8B (FREE)' },
+                        { value: 'mistralai/mistral-7b-instruct:free', text: 'Mistral 7B (FREE)' },
+                        { value: 'deepseek/deepseek-chat', text: 'DeepSeek-V3 on OpenRouter' }
+                    ],
+                    defaultModel: 'google/gemma-2-9b-it:free',
+                    defaultUrl: 'https://openrouter.ai/api/v1',
+                    keyUrl: 'https://openrouter.ai/',
+                    keyInstructions: 'Get an OpenRouter API key from <a href="https://openrouter.ai/" target="_blank" style="color: var(--accent); text-decoration: underline;">OpenRouter</a>.'
+                },
+                'custom': {
+                    name: 'Custom OpenAI-Compatible API',
+                    hasKey: true,
+                    hasUrl: true,
+                    models: [],
+                    defaultModel: '',
+                    defaultUrl: '',
+                    keyInstructions: 'Enter the API key and Base URL for your custom OpenAI-compatible endpoint (e.g. Ollama, LM Studio, etc.).'
+                }
+            };
+
+            // Toggle Custom Prompt Visibility
+            function toggleCustomPromptVisibility() {
+                if (aiPromptStyleSelect.value === 'custom') {
+                    customPromptRow.style.display = 'flex';
+                } else {
+                    customPromptRow.style.display = 'none';
+                }
+            }
+            aiPromptStyleSelect.addEventListener('change', toggleCustomPromptVisibility);
+
+            // Handle Model Select changes
+            aiModelSelect.addEventListener('change', () => {
+                if (aiModelSelect.value === 'custom-choice') {
+                    aiModelCustomInput.style.display = 'block';
+                } else {
+                    aiModelCustomInput.style.display = 'none';
+                }
+            });
+
+            // Update UI fields based on selected provider
+            function updateUIForProvider(provider, isInitialLoad = false) {
+                const config = providerDefaults[provider];
+                if (!config) return;
+
+                // 1. API Key Display
+                if (config.hasKey) {
+                    apiKeyRow.style.display = 'flex';
+                    apiKeyLabel.textContent = `${config.name} API Key`;
+                    apiKeyInfo.innerHTML = config.keyInstructions;
+                    
+                    // Load saved key
+                    let savedKey = '';
+                    if (provider === 'deepseek') {
+                        savedKey = localStorage.getItem('moodFixerDeepseekKey') || localStorage.getItem('moodFixerKey_deepseek') || '';
+                    } else {
+                        savedKey = localStorage.getItem(`moodFixerKey_${provider}`) || '';
+                    }
+                    apiKeyInput.value = savedKey;
+                } else {
+                    apiKeyRow.style.display = 'none';
+                    apiKeyInput.value = '';
+                }
+
+                // 2. Base URL Display
+                if (config.hasUrl) {
+                    apiUrlRow.style.display = 'flex';
+                    // Load saved URL or default
+                    const savedUrl = localStorage.getItem(`moodFixerUrl_${provider}`) || config.defaultUrl;
+                    apiUrlInput.value = savedUrl;
+                } else {
+                    apiUrlRow.style.display = 'none';
+                    apiUrlInput.value = '';
+                }
+
+                // 3. Model Display
+                if (provider !== 'local') {
+                    apiModelRow.style.display = 'flex';
+                    
+                    // Clear and rebuild options
+                    aiModelSelect.innerHTML = '';
+                    
+                    if (config.models.length > 0) {
+                        config.models.forEach(modelOpt => {
+                            const opt = document.createElement('option');
+                            opt.value = modelOpt.value;
+                            opt.textContent = modelOpt.text;
+                            aiModelSelect.appendChild(opt);
+                        });
+                        
+                        // Add custom option
+                        const customOpt = document.createElement('option');
+                        customOpt.value = 'custom-choice';
+                        customOpt.textContent = 'Custom Model Name...';
+                        aiModelSelect.appendChild(customOpt);
+                        
+                        aiModelSelect.style.display = 'block';
+                        
+                        // Load saved model
+                        let savedModel = '';
+                        if (provider === 'deepseek' && isInitialLoad) {
+                            savedModel = localStorage.getItem('moodFixerAIModel') || localStorage.getItem('moodFixerModel_deepseek') || config.defaultModel;
+                        } else {
+                            savedModel = localStorage.getItem(`moodFixerModel_${provider}`) || config.defaultModel;
+                        }
+                        
+                        // Check if savedModel matches any option
+                        const matchesOption = Array.from(aiModelSelect.options).some(o => o.value === savedModel);
+                        if (matchesOption) {
+                            aiModelSelect.value = savedModel;
+                            aiModelCustomInput.style.display = 'none';
+                            aiModelCustomInput.value = '';
+                        } else {
+                            aiModelSelect.value = 'custom-choice';
+                            aiModelCustomInput.style.display = 'block';
+                            aiModelCustomInput.value = savedModel;
+                        }
+                    } else {
+                        // Custom / No predefined models
+                        aiModelSelect.style.display = 'none';
+                        aiModelCustomInput.style.display = 'block';
+                        
+                        const savedModel = localStorage.getItem(`moodFixerModel_${provider}`) || '';
+                        aiModelCustomInput.value = savedModel;
+                    }
+                } else {
+                    apiModelRow.style.display = 'none';
+                }
+            }
+
+            aiModeSelect.addEventListener('change', () => {
+                updateUIForProvider(aiModeSelect.value);
+                apiTestStatus.textContent = 'Not tested yet';
+                apiTestStatus.style.color = 'var(--text-secondary)';
+            });
+
+            // Load initial state
+            const savedMode = localStorage.getItem('moodFixerAIMode') || 'local';
+            const savedPromptStyle = localStorage.getItem('moodFixerAIPromptStyle') || 'compassionate';
+            const savedCustomPrompt = localStorage.getItem('moodFixerAICustomPrompt') || '';
+
+            aiModeSelect.value = savedMode;
+            aiPromptStyleSelect.value = savedPromptStyle;
+            aiCustomPrompt.value = savedCustomPrompt;
+
+            updateUIForProvider(savedMode, true);
+            toggleCustomPromptVisibility();
+
+            // Toggle Password visibility
+            toggleKeyVisibilityBtn.addEventListener('click', () => {
+                if (apiKeyInput.type === 'password') {
+                    apiKeyInput.type = 'text';
+                    toggleKeyVisibilityBtn.textContent = 'Hide Key';
+                } else {
+                    apiKeyInput.type = 'password';
+                    toggleKeyVisibilityBtn.textContent = 'Show Key';
+                }
+            });
+
+            // Save Settings
+            btnSaveAiSettings.addEventListener('click', () => {
+                const provider = aiModeSelect.value;
+                localStorage.setItem('moodFixerAIMode', provider);
+                localStorage.setItem('moodFixerAIPromptStyle', aiPromptStyleSelect.value);
+                localStorage.setItem('moodFixerAICustomPrompt', aiCustomPrompt.value.trim());
+
+                if (provider !== 'local') {
+                    // Save key
+                    if (providerDefaults[provider].hasKey) {
+                        const key = apiKeyInput.value.trim();
+                        localStorage.setItem(`moodFixerKey_${provider}`, key);
+                        if (provider === 'deepseek') {
+                            // Maintain deepseek key for backwards compatibility
+                            localStorage.setItem('moodFixerDeepseekKey', key);
+                        }
+                    }
+                    
+                    // Save URL
+                    if (providerDefaults[provider].hasUrl) {
+                        localStorage.setItem(`moodFixerUrl_${provider}`, apiUrlInput.value.trim());
+                    }
+                    
+                    // Save Model
+                    let selectedModel = '';
+                    if (provider === 'custom' || aiModelSelect.value === 'custom-choice') {
+                        selectedModel = aiModelCustomInput.value.trim();
+                    } else {
+                        selectedModel = aiModelSelect.value;
+                    }
+                    localStorage.setItem(`moodFixerModel_${provider}`, selectedModel);
+                    
+                    if (provider === 'deepseek') {
+                        // Maintain deepseek model for backwards compatibility
+                        localStorage.setItem('moodFixerAIModel', selectedModel);
+                    }
+                }
+
+                // Visually confirm saving
+                const origText = btnSaveAiSettings.innerHTML;
+                btnSaveAiSettings.innerHTML = '✅ Saved Successfully!';
+                btnSaveAiSettings.style.background = '#2b9c93';
+                setTimeout(() => {
+                    btnSaveAiSettings.innerHTML = origText;
+                    btnSaveAiSettings.style.background = '';
+                    // Redirect to home
+                    window.location.href = 'index.html';
+                }, 1200);
+            });
+
+            // Test Connection
+            btnTestApi.addEventListener('click', async () => {
+                const provider = aiModeSelect.value;
+                const key = apiKeyInput.value.trim();
+                const baseUrl = apiUrlInput.value.trim();
+                let model = '';
+                
+                if (provider === 'custom' || aiModelSelect.value === 'custom-choice') {
+                    model = aiModelCustomInput.value.trim();
+                } else {
+                    model = aiModelSelect.value;
+                }
+
+                if (provider === 'local') {
+                    apiTestStatus.textContent = '✅ Local Database is always active (Offline)';
+                    apiTestStatus.style.color = '#2b9c93';
+                    return;
+                }
+
+                if (provider !== 'free-ai' && !key) {
+                    apiTestStatus.textContent = '❌ Please enter an API Key';
+                    apiTestStatus.style.color = 'var(--accent)';
+                    return;
+                }
+
+                if ((provider === 'custom' || aiModelSelect.value === 'custom-choice') && !model) {
+                    apiTestStatus.textContent = '❌ Please enter a model name';
+                    apiTestStatus.style.color = 'var(--accent)';
+                    return;
+                }
+
+                btnTestApi.disabled = true;
+                apiTestStatus.textContent = '⏳ Testing connection...';
+                apiTestStatus.style.color = 'var(--text-primary)';
+
+                try {
+                    let response;
+                    if (provider === 'free-ai') {
+                        // Keyless test using Pollinations AI GET completions
+                        response = await fetch(`https://text.pollinations.ai/Say%20"Connection%20Active"%20in%202%20words?model=${model}`);
+                        if (response.ok) {
+                            const resultText = await response.text();
+                            apiTestStatus.textContent = `✅ Success: "${resultText.trim()}"`;
+                            apiTestStatus.style.color = '#2b9c93';
+                        } else {
+                            apiTestStatus.textContent = `❌ Failed: ${response.statusText}`;
+                            apiTestStatus.style.color = 'var(--accent)';
+                        }
+                    } else {
+                        // Predefined or Custom OpenAI-Compatible API Call
+                        const url = `${(baseUrl || providerDefaults[provider].defaultUrl).replace(/\/+$/, '')}/chat/completions`;
+                        const headers = {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${key}`
+                        };
+
+                        if (provider === 'openrouter') {
+                            headers['HTTP-Referer'] = 'https://moodfixer.com';
+                            headers['X-Title'] = 'Mood Fixer';
+                        }
+
+                        response = await fetch(url, {
+                            method: 'POST',
+                            headers: headers,
+                            body: JSON.stringify({
+                                model: model,
+                                messages: [
+                                    { role: 'user', content: 'Say "Connection Active" in 2 words.' }
+                                ],
+                                max_tokens: 10
+                            })
+                        });
+
+                        if (response.ok) {
+                            const data = await response.json();
+                            const resultText = data.choices[0].message.content.trim();
+                            apiTestStatus.textContent = `✅ Success: "${resultText}"`;
+                            apiTestStatus.style.color = '#2b9c93';
+                        } else {
+                            const err = await response.json().catch(() => ({}));
+                            const errMsg = err.error?.message || response.statusText || 'Unknown API error';
+                            apiTestStatus.textContent = `❌ Failed: ${errMsg}`;
+                            apiTestStatus.style.color = 'var(--accent)';
+                        }
+                    }
+                } catch (error) {
+                    console.error('API Test Error:', error);
+                    apiTestStatus.textContent = '❌ Connection failed (Network/CORS error)';
+                    apiTestStatus.style.color = 'var(--accent)';
+                } finally {
+                    btnTestApi.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

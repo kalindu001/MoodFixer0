@@ -1984,3 +1984,101 @@ header.main-header {
     transition: all 0.3s ease;
     font-family: inherit;
 }
+
+/* ── AI Page Mobile Responsiveness ── */
+@media (max-width: 768px) {
+    .settings-card {
+        padding: 1.2rem 1rem;
+        gap: 1.2rem;
+        border-radius: 16px;
+    }
+
+    .setting-row label {
+        font-size: 0.95rem;
+    }
+
+    .setting-input,
+    .setting-select {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.8rem;
+    }
+
+    /* Prevent select elements from overflowing on mobile */
+    .setting-select {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Stack the test row vertically on mobile */
+    #api-test-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.8rem !important;
+    }
+
+    #api-test-row #btn-test-api {
+        width: 100%;
+        text-align: center;
+    }
+
+    #api-test-row #api-test-status {
+        text-align: center !important;
+        flex: none !important;
+    }
+
+    /* Stack save/back buttons vertically */
+    #app main > div > div:last-of-type,
+    .glass-container > div[style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    /* Full-width save & back buttons */
+    #btn-save-ai-settings {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem !important;
+        padding: 0.9rem 1rem !important;
+    }
+
+    .glass-container > div a.btn-secondary {
+        text-align: center;
+        width: 100%;
+        font-size: 1rem !important;
+        padding: 0.9rem 1rem !important;
+    }
+
+    /* Reduce heading size */
+    .settings-card + div .gradient-text,
+    .main-header .gradient-text {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .settings-card {
+        padding: 1rem 0.8rem;
+        gap: 1rem;
+    }
+
+    .setting-input,
+    .setting-select {
+        font-size: 0.9rem;
+        padding: 0.65rem 0.7rem;
+    }
+
+    .setting-info {
+        font-size: 0.78rem;
+    }
+
+    .setting-row label {
+        font-size: 0.9rem;
+    }
+
+    /* Shrink the toggle key visibility button */
+    #btn-toggle-key-visibility {
+        font-size: 0.8rem !important;
+    }
+}

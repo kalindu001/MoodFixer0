@@ -546,6 +546,21 @@ header.main-header {
     transform: scale(1.05);
 }
 
+.btn-custom-ai-link {
+    background: #ffffff !important;
+    border-radius: 50px !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.btn-custom-ai-link:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    transform: translateY(-2px) scale(1.03) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
 /* Result Card */
 .result-card {
     background: rgba(255, 255, 255, 0.8);
@@ -1805,6 +1820,18 @@ header.main-header {
 
     .btn-option-card .card-title {
         font-size: 0.9rem !important;
+    }
+
+    .btn-custom-ai-link {
+        font-size: 0.8rem !important;
+        padding: 0.5rem 0.8rem !important;
+        white-space: nowrap !important;
+        text-align: center !important;
+        display: flex !important;
+        justify-content: center !important;
+        line-height: 1.3 !important;
+        max-width: 90% !important;
+        margin: 0 auto !important;
     }
 
     /* Stats overview grid: stack vertically */

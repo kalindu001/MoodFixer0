@@ -1732,9 +1732,9 @@ header.main-header {
         border-radius: 20px;
     }
 
-    /* Reduce top padding so content is visible right after button click */
+    /* Reduce top padding so content is visible right after button click, clearing the fixed top nav bar */
     #main-content {
-        padding: 1rem 0.75rem 2rem;
+        padding: calc(var(--nav-height, 70px) + 1.5rem) 0.75rem 2rem;
     }
 
     /* Make emoji mood buttons larger and more touch-friendly */

@@ -200,10 +200,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentStep.classList.remove('reveal-visible');
             }
 
-            // Scroll to top — on mobile, scroll glass container into view so result is immediately visible
+            // Scroll to top — on mobile, scroll with an offset so the fixed top-nav header does not cover the glass container
             const glassEl = document.querySelector('.glass-container');
             if (glassEl && window.innerWidth <= 768) {
-                glassEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const navHeight = 70; // Height of fixed top-nav
+                const elementPosition = glassEl.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - navHeight - 16; // 16px extra spacing
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }

@@ -200,8 +200,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentStep.classList.remove('reveal-visible');
             }
 
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll to top — on mobile, scroll glass container into view so result is immediately visible
+            const glassEl = document.querySelector('.glass-container');
+            if (glassEl && window.innerWidth <= 768) {
+                glassEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
             // Step 2: Show target step (initially hidden by CSS transition state)
             targetStep.classList.remove('hidden');

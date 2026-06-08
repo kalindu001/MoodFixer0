@@ -224,6 +224,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileMenu.classList.remove('active');
             });
         });
+
+        // Close button (✕)
+        const mobileCloseBtn = document.getElementById('mobile-menu-close');
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        }
     }
 
     // Calculate and render stats widgets

@@ -3,8 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mood Fixer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Mood Fixer - AI Mood Tracker, Motivation & Positive Affirmations</title>
+    <meta name="description"
+        content="Boost your emotional well-being instantly with Mood Fixer. Get custom AI-generated positive affirmations, quotes, facts, and jokes tailored to how you feel.">
+    <meta name="keywords"
+        content="mood fixer, mood tracker, daily affirmations, mental health app, mood diary, ai motivation, positive quotes, stress relief, emotional support, daily encouragement, PRKI Pallegama">
+    <meta name="author" content="P.R.K.I. Pallegama">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://kalindu001.github.io/MoodFixer0/index.html">
+    <meta name="theme-color" content="#ff6b6b">
+
+    <!-- Favicon & Mobile Touch Icons -->
+    <link rel="icon" type="image/png" href="mood fix logo.png">
+    <link rel="apple-touch-icon" href="mood fix logo.png">
+    <meta name="application-name" content="Mood Fixer">
+    <meta name="apple-mobile-web-app-title" content="Mood Fixer">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kalindu001.github.io/MoodFixer0/index.html">
+    <meta property="og:title" content="Mood Fixer - AI Mood Tracker, Motivation & Positive Affirmations">
+    <meta property="og:description"
+        content="Boost your emotional well-being instantly with Mood Fixer. Get custom AI-generated positive affirmations, quotes, facts, and jokes tailored to how you feel.">
+    <meta property="og:image" content="https://kalindu001.github.io/MoodFixer0/mood%20fix%20logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Mood Fixer">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://kalindu001.github.io/MoodFixer0/index.html">
+    <meta name="twitter:title" content="Mood Fixer - AI Mood Tracker, Motivation & Positive Affirmations">
+    <meta name="twitter:description"
+        content="Boost your emotional well-being instantly with Mood Fixer. Get custom AI-generated positive affirmations, quotes, facts, and jokes tailored to how you feel.">
+    <meta name="twitter:image" content="https://kalindu001.github.io/MoodFixer0/mood%20fix%20logo.png">
+
+    <!-- JSON-LD Structured Data Schema.org (Gold Standard SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Mood Fixer",
+      "description": "Boost your emotional well-being instantly with Mood Fixer. Get custom AI-generated positive affirmations, quotes, facts, and jokes tailored to how you feel.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "P.R.K.I. Pallegama"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Mood Fixer",
+      "url": "https://kalindu001.github.io/MoodFixer0/index.html"
+    }
+    </script>
+
+    <!-- Stylesheets & Fonts -->
     <link rel="stylesheet" href="style.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -41,14 +111,15 @@
 
     <!-- Mobile Navigation Overlay -->
     <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
         <ul class="mobile-menu-links">
-            <li><a href="index.html" class="mob-link">Home</a></li>
-            <li><a href="index.html#step-identity" class="mob-link">Get Started</a></li>
-            <li><a href="index.html#step-mood" class="mob-link">Pick Mood</a></li>
-            <li><a href="tracking.html" class="mob-link">Stats</a></li>
-            <li><a href="ai.html" class="mob-link">AI Config</a></li>
-            <li><a href="safety.html" class="mob-link">Safety Help</a></li>
-            <li><a href="faq.html" class="mob-link">FAQ</a></li>
+            <li><a href="index.html" class="mob-link" id="mob-nav-home">Home</a></li>
+            <li><a href="index.html#step-identity" class="mob-link" id="mob-nav-get-started">Get Started</a></li>
+            <li><a href="index.html#step-mood" class="mob-link" id="mob-nav-pick-mood">Pick Mood</a></li>
+            <li><a href="tracking.html" class="mob-link" id="mob-nav-tracking">Stats</a></li>
+            <li><a href="ai.html" class="mob-link" id="mob-nav-ai-config">AI Config</a></li>
+            <li><a href="safety.html" class="mob-link" id="mob-nav-safety">Safety Help</a></li>
+            <li><a href="faq.html" class="mob-link" id="mob-nav-faq">FAQ</a></li>
             <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=moodfixer0@gmail.com" target="_blank">Contact</a>
             </li>
         </ul>
@@ -146,6 +217,8 @@
                     <div class="text-input-group">
                         <input type="text" id="custom-mood" placeholder="Or describe your mood in words...">
                     </div>
+                    <p id="mood-hint" class="mood-hint" style="display:none;">👇 Now tap <strong>"Fix My Mood!"</strong>
+                        to get your personalized message!</p>
                     <button id="btn-submit-mood" class="btn-primary">Fix My Mood! 🚀</button>
                 </div>
 
@@ -164,6 +237,17 @@
 
 
         </main>
+    </div>
+
+    <!-- Daily Welcome Suggestion Overlay -->
+    <div id="daily-welcome-overlay" class="daily-welcome-overlay" style="display:none;">
+        <div class="daily-welcome-card">
+            <div class="daily-welcome-emoji">🌟</div>
+            <h2 class="daily-welcome-title">Welcome Back!</h2>
+            <p class="daily-welcome-text">Ready to fix your mood today? Pick an emoji that matches how you feel and let
+                our AI brighten your day!</p>
+            <button id="daily-welcome-btn" class="btn-primary daily-welcome-btn">Let's Go! 🚀</button>
+        </div>
     </div>
 
     <!-- Bottom Footer -->
@@ -313,6 +397,20 @@
             <span class="footer-powered">Powered by the Mood Fixer Project Team &amp; Gemini AI</span>
         </div>
     </footer>
+
+    <!-- Tutorial Guide Bar (first-time users only, cannot be dismissed) -->
+    <div id="tutorial-bar" class="tutorial-bar" style="display:none;">
+        <div class="tutorial-bar-inner">
+            <div class="tutorial-bar-icon" id="tutorial-bar-icon">👋</div>
+            <div class="tutorial-bar-body">
+                <span class="tutorial-bar-step" id="tutorial-bar-step">Step 1 of 4</span>
+                <p class="tutorial-bar-message" id="tutorial-bar-message">Welcome! Tap "Get Started" to begin.</p>
+            </div>
+        </div>
+        <div class="tutorial-bar-progress">
+            <div class="tutorial-bar-progress-fill" id="tutorial-bar-progress-fill" style="width: 25%;"></div>
+        </div>
+    </div>
 
     <script src="data.js"></script>
     <script src="app.js"></script>

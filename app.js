@@ -128,6 +128,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setupHistory();
+
+    // --- Daily Welcome Suggestion (first visit each day) ---
+    (function showDailyWelcome() {
+        const overlay = document.getElementById('daily-welcome-overlay');
+        const welcomeBtn = document.getElementById('daily-welcome-btn');
+        if (!overlay || !welcomeBtn) return;
+
+        const today = new Date().toDateString();
+        const lastWelcomeDate = localStorage.getItem('moodFixerLastWelcomeDate');
+
+        if (lastWelcomeDate !== today) {
+            // First visit today — show the welcome overlay
+            overlay.style.display = 'flex';
+            localStorage.setItem('moodFixerLastWelcomeDate', today);
+
+            welcomeBtn.addEventListener('click', () => {
+                overlay.style.display = 'none';
+                navigateToStep(stepIdentity);
+            });
+
+            // Also close if user clicks on the overlay background
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.style.display = 'none';
+                }
+            });
+        }
+    })();
     
     // Initial Entry Animation for Glass Container
     const glassContainer = document.querySelector('.glass-container');
@@ -167,6 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileMenu.classList.remove('active');
             });
         });
+
+        // Close button (✕) inside mobile menu
+        const mobileCloseBtn = document.getElementById('mobile-menu-close');
+        if (mobileCloseBtn) {
+            mobileCloseBtn.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        }
     }
 
     // --- 2. App State & Flow ---
@@ -180,6 +217,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const stepIdentity = document.getElementById('step-identity');
     const stepMood = document.getElementById('step-mood');
     const stepResult = document.getElementById('step-result');
+
+    // --- Tutorial Guide System (first-time users) ---
+    let tutorialActive = !localStorage.getItem('moodFixerTutorialDone');
+    let tutorialStep = 0; // 0=welcome, 1=identity, 2=mood-pick, 3=emoji-selected, 4=result
+
+    const tutorialSteps = [
+        { icon: '👋', step: 'Step 1 of 5', message: 'Welcome to Mood Fixer! Tap the "Get Started" button to begin your journey.', progress: 20 },
+        { icon: '👤', step: 'Step 2 of 5', message: 'Great! Now tell us about yourself — tap one of the identity cards above.', progress: 40 },
+        { icon: '😊', step: 'Step 3 of 5', message: 'Awesome! Now pick an emoji that matches how you\'re feeling right now.', progress: 60 },
+        { icon: '🚀', step: 'Step 4 of 5', message: 'Perfect choice! Now tap the "Fix My Mood!" button to get your personalized message.', progress: 80 },
+        { icon: '🎉', step: 'Step 5 of 5', message: 'Amazing! Here\'s your mood fix! You\'ve completed the tutorial. Enjoy Mood Fixer!', progress: 100 }
+    ];
+
+    function updateTutorial(step) {
+        if (!tutorialActive) return;
+        tutorialStep = step;
+        const bar = document.getElementById('tutorial-bar');
+        const icon = document.getElementById('tutorial-bar-icon');
+        const stepLabel = document.getElementById('tutorial-bar-step');
+        const message = document.getElementById('tutorial-bar-message');
+        const progressFill = document.getElementById('tutorial-bar-progress-fill');
+        if (!bar) return;
+
+        const data = tutorialSteps[step];
+        if (!data) return;
+
+        bar.style.display = 'block';
+        document.body.classList.add('tutorial-active');
+        icon.textContent = data.icon;
+        stepLabel.textContent = data.step;
+        message.textContent = data.message;
+        progressFill.style.width = data.progress + '%';
+
+        // If last step, auto-hide after 5 seconds and mark done
+        if (step >= tutorialSteps.length - 1) {
+            setTimeout(() => {
+                bar.style.display = 'none';
+                document.body.classList.remove('tutorial-active');
+                tutorialActive = false;
+                localStorage.setItem('moodFixerTutorialDone', 'true');
+            }, 6000);
+        }
+    }
 
     function navigateToStep(targetStep) {
         const steps = [stepWelcome, stepIdentity, stepMood, stepResult];
@@ -242,12 +322,28 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (targetStep === stepResult) {
                 document.getElementById('nav-history')?.classList.remove('active');
             }
+
+            // Update tutorial guide when steps change
+            if (tutorialActive) {
+                if (targetStep === stepWelcome) updateTutorial(0);
+                else if (targetStep === stepIdentity) updateTutorial(1);
+                else if (targetStep === stepMood) updateTutorial(2);
+                else if (targetStep === stepResult) updateTutorial(4);
+            }
         }, 400);
     }
 
     // Header & Footer Navigation
-    const homeLinks = [document.getElementById('nav-home'), document.getElementById('footer-home')];
-    const getStartedLinks = [document.getElementById('nav-get-started'), document.getElementById('footer-get-started')];
+    const homeLinks = [
+        document.getElementById('nav-home'),
+        document.getElementById('footer-home'),
+        document.getElementById('mob-nav-home')
+    ];
+    const getStartedLinks = [
+        document.getElementById('nav-get-started'),
+        document.getElementById('footer-get-started'),
+        document.getElementById('mob-nav-get-started')
+    ];
     const startJourneyBtn = document.getElementById('nav-start-journey');
 
     if(startJourneyBtn) {
@@ -274,7 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const pickMoodLinks = [document.getElementById('nav-pick-mood'), document.getElementById('footer-pick-mood')];
+    const pickMoodLinks = [
+        document.getElementById('nav-pick-mood'),
+        document.getElementById('footer-pick-mood'),
+        document.getElementById('mob-nav-pick-mood')
+    ];
     const resultLink = document.getElementById('footer-result');
 
     pickMoodLinks.forEach(link => {
@@ -321,11 +421,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mood Selection (Emoji)
     const moodBtns = document.querySelectorAll('#step-mood .emoji-btn');
+    const moodHint = document.getElementById('mood-hint');
     moodBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             userState.moodEmoji = e.target.dataset.mood;
             moodBtns.forEach(b => b.classList.remove('selected'));
             e.target.classList.add('selected');
+
+            // Show the hint message
+            if (moodHint) {
+                moodHint.style.display = 'block';
+            }
+
+            // Update tutorial to "tap Fix My Mood" step
+            if (tutorialActive) {
+                updateTutorial(3);
+            }
+
+            // Auto-scroll to the Fix My Mood button
+            const submitBtn = document.getElementById('btn-submit-mood');
+            if (submitBtn) {
+                setTimeout(() => {
+                    submitBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+            }
         });
     });
 
@@ -339,6 +458,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!userState.moodEmoji && !userState.moodText.trim()) {
             alert("Please select an emoji or type how you feel!");
             return;
+        }
+
+        // Hide the hint message when submitting
+        if (moodHint) {
+            moodHint.style.display = 'none';
         }
 
         // Save selected mood & custom description to history
@@ -695,4 +819,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
+
+    // --- Start Tutorial or check URL hash for navigation ---
+    const hash = window.location.hash;
+    if (hash === '#step-identity') {
+        navigateToStep(stepIdentity);
+    } else if (hash === '#step-mood') {
+        navigateToStep(stepMood);
+    } else if (tutorialActive) {
+        updateTutorial(0);
+    }
 });

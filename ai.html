@@ -3,9 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mood Fixer - AI Config</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>AI Configuration & Custom Personality - Mood Fixer</title>
+    <meta name="description" content="Personalize your Mood Fixer AI experience. Configure custom personalities and connect OpenAI, DeepSeek, Google Gemini, and Groq API keys.">
+    <meta name="keywords" content="mood fixer ai, custom ai personality, ai configuration, deepseek integration, openai config, gemini api key, groq ai, custom prompts, mental wellness tech, PRKI Pallegama">
+    <meta name="author" content="P.R.K.I. Pallegama">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://kalindu001.github.io/MoodFixer0/ai.html">
+    <meta name="theme-color" content="#ff6b6b">
+
+    <!-- Favicon & Mobile Touch Icons -->
+    <link rel="icon" type="image/png" href="mood fix logo.png">
+    <link rel="apple-touch-icon" href="mood fix logo.png">
+    <meta name="application-name" content="Mood Fixer">
+    <meta name="apple-mobile-web-app-title" content="Mood Fixer">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kalindu001.github.io/MoodFixer0/ai.html">
+    <meta property="og:title" content="AI Configuration & Custom Personality - Mood Fixer">
+    <meta property="og:description" content="Personalize your Mood Fixer AI experience. Configure custom personalities and connect OpenAI, DeepSeek, Google Gemini, and Groq API keys.">
+    <meta property="og:image" content="https://kalindu001.github.io/MoodFixer0/mood%20fix%20logo.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Mood Fixer">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://kalindu001.github.io/MoodFixer0/ai.html">
+    <meta name="twitter:title" content="AI Configuration & Custom Personality - Mood Fixer">
+    <meta name="twitter:description" content="Personalize your Mood Fixer AI experience. Configure custom personalities and connect OpenAI, DeepSeek, Google Gemini, and Groq API keys.">
+    <meta name="twitter:image" content="https://kalindu001.github.io/MoodFixer0/mood%20fix%20logo.png">
+
+    <!-- JSON-LD Structured Data Schema.org (Gold Standard SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "AI Configuration - Mood Fixer",
+      "description": "Personalize your Mood Fixer AI experience. Configure custom personalities and connect OpenAI, DeepSeek, Google Gemini, and Groq API keys.",
+      "url": "https://kalindu001.github.io/MoodFixer0/ai.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mood Fixer",
+        "url": "https://kalindu001.github.io/MoodFixer0/index.html"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://kalindu001.github.io/MoodFixer0/index.html"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AI Configuration",
+            "item": "https://kalindu001.github.io/MoodFixer0/ai.html"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Stylesheets & Fonts -->
+    <link rel="stylesheet" href="style.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 
@@ -44,6 +113,7 @@
 
     <!-- Mobile Navigation Overlay -->
     <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
         <ul class="mobile-menu-links">
             <li><a href="index.html" class="mob-link">Home</a></li>
             <li><a href="index.html#step-identity" class="mob-link">Get Started</a></li>
@@ -221,6 +291,15 @@
                         mobileMenu.classList.remove('active');
                     });
                 });
+
+                // Close button (✕)
+                const mobileCloseBtn = document.getElementById('mobile-menu-close');
+                if (mobileCloseBtn) {
+                    mobileCloseBtn.addEventListener('click', () => {
+                        hamburgerBtn.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    });
+                }
             }
 
             // Elements

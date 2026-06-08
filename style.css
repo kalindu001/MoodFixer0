@@ -1463,6 +1463,40 @@ header.main-header {
     pointer-events: auto;
 }
 
+.mobile-menu-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    line-height: 1;
+}
+
+.mobile-menu-close:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.mobile-menu-close:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
 .mobile-menu-links {
     list-style: none;
     display: flex;
@@ -2184,5 +2218,335 @@ header.main-header {
     /* Shrink the toggle key visibility button */
     #btn-toggle-key-visibility {
         font-size: 0.8rem !important;
+    }
+}
+
+/* ============================================
+   Mood Hint Message (after emoji selection)
+   ============================================ */
+.mood-hint {
+    text-align: center;
+    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0.6rem 0 0.2rem;
+    padding: 0.6rem 1rem;
+    background: rgba(255, 107, 107, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 107, 107, 0.25);
+    animation: hintPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.02); }
+}
+
+/* ============================================
+   Daily Welcome Suggestion Overlay
+   ============================================ */
+.daily-welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: overlayFadeIn 0.4s ease;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.daily-welcome-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.4);
+    animation: cardSlideUp 0.5s var(--ease-premium);
+}
+
+@keyframes cardSlideUp {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.daily-welcome-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 0.8rem;
+    animation: welcomeBounce 2s ease-in-out infinite;
+}
+
+@keyframes welcomeBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.daily-welcome-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent), #a18cd1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.daily-welcome-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.daily-welcome-btn {
+    font-size: 1.1rem;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+}
+
+/* ============================================
+   Tutorial Guide Bar (first-time users)
+   ============================================ */
+.tutorial-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    color: #fff;
+    box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
+    animation: tutorialSlideUp 0.5s var(--ease-premium);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+@keyframes tutorialSlideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.tutorial-bar-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.tutorial-bar-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    animation: tutorialIconBounce 2s ease-in-out infinite;
+}
+
+@keyframes tutorialIconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.tutorial-bar-body {
+    flex: 1;
+}
+
+.tutorial-bar-step {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+}
+
+.tutorial-bar-message {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 0;
+}
+
+.tutorial-bar-progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    width: 100%;
+}
+
+.tutorial-bar-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #fbc2eb);
+    border-radius: 0 2px 2px 0;
+    transition: width 0.6s var(--ease-premium);
+}
+
+/* Ensure the body has padding so content doesn't hide behind the tutorial bar */
+body.tutorial-active {
+    padding-bottom: 90px;
+}
+
+/* ============================================
+   Mobile Responsive: Mood Hint, Daily Welcome,
+   Tutorial Bar
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    /* --- Mood Hint --- */
+    .mood-hint {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.8rem;
+        margin: 0.4rem 0 0.15rem;
+        border-radius: 10px;
+    }
+
+    /* --- Daily Welcome Overlay --- */
+    .daily-welcome-overlay {
+        padding: 1rem;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    .daily-welcome-card {
+        padding: 1.8rem 1.4rem;
+        border-radius: 20px;
+        max-width: 340px;
+        width: 92%;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    .daily-welcome-emoji {
+        font-size: 2.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .daily-welcome-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .daily-welcome-text {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin-bottom: 1.2rem;
+    }
+
+    .daily-welcome-btn {
+        font-size: 0.95rem;
+        padding: 0.75rem 1.8rem;
+    }
+
+    /* --- Tutorial Bar --- */
+    .tutorial-bar-inner {
+        padding: 0.75rem 1rem;
+        gap: 0.7rem;
+    }
+
+    .tutorial-bar-icon {
+        font-size: 1.6rem;
+    }
+
+    .tutorial-bar-step {
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+        margin-bottom: 0.15rem;
+    }
+
+    .tutorial-bar-message {
+        font-size: 0.82rem;
+        line-height: 1.4;
+    }
+
+    body.tutorial-active {
+        padding-bottom: 75px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* --- Mood Hint --- */
+    .mood-hint {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    /* --- Daily Welcome --- */
+    .daily-welcome-card {
+        padding: 1.5rem 1.1rem;
+        border-radius: 16px;
+        max-width: 300px;
+    }
+
+    .daily-welcome-emoji {
+        font-size: 2.2rem;
+    }
+
+    .daily-welcome-title {
+        font-size: 1.15rem;
+    }
+
+    .daily-welcome-text {
+        font-size: 0.82rem;
+    }
+
+    .daily-welcome-btn {
+        font-size: 0.88rem;
+        padding: 0.7rem 1.5rem;
+    }
+
+    /* --- Tutorial Bar --- */
+    .tutorial-bar-inner {
+        padding: 0.6rem 0.8rem;
+        gap: 0.5rem;
+    }
+
+    .tutorial-bar-icon {
+        font-size: 1.4rem;
+    }
+
+    .tutorial-bar-step {
+        font-size: 0.55rem;
+    }
+
+    .tutorial-bar-message {
+        font-size: 0.75rem;
+        line-height: 1.35;
+    }
+
+    body.tutorial-active {
+        padding-bottom: 70px;
+    }
+}
+
+/* Safe area inset for devices with notch / home indicator */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .tutorial-bar {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    body.tutorial-active {
+        padding-bottom: calc(90px + env(safe-area-inset-bottom));
+    }
+
+    .daily-welcome-overlay {
+        padding-bottom: env(safe-area-inset-bottom);
     }
 }

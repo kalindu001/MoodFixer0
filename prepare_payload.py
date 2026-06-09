@@ -1,7 +1,7 @@
 import json
 import os
 
-files_to_read = ['app.js', 'index.html', 'style.css']
+files_to_read = ['app.js', 'index.html', 'style.css', 'ai.html', 'faq.html', 'privacy.html', 'safety.html', 'terms.html', 'tracking.html', 'sitemap.xml', 'robots.txt']
 workspace = r"c:\Users\-e-\Desktop\mood fixer project"
 
 payload = {}

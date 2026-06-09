@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const filesToRead = ['app.js', 'index.html', 'style.css'];
+const filesToRead = ['app.js', 'index.html', 'style.css', 'ai.html', 'faq.html', 'privacy.html', 'safety.html', 'terms.html', 'tracking.html', 'sitemap.xml', 'robots.txt'];
 const workspace = "c:\\Users\\-e-\\Desktop\\mood fixer project";
 
 const payload = {};

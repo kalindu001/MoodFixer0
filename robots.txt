@@ -1,6 +1,6 @@
-# https://www.robotstxt.org/robotstxt.html
+﻿# https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
 
 # Sitemap Location
-Sitemap: https://kalindu001.github.io/MoodFixer0/sitemap.xml
+Sitemap: https://moodfixer.netlify.app/sitemap.xml

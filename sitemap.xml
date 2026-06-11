@@ -5,7 +5,7 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <!-- Home / Main Landing Page -->
     <url>
-        <loc>https://kalindu001.github.io/MoodFixer0/index.html</loc>
+        <loc>https://moodfixer.netlify.app/index.html</loc>
         <lastmod>2026-06-09</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.00</priority>
@@ -13,7 +13,7 @@
 
     <!-- Mood Analytics & Stats -->
     <url>
-        <loc>https://kalindu001.github.io/MoodFixer0/tracking.html</loc>
+        <loc>https://moodfixer.netlify.app/tracking.html</loc>
         <lastmod>2026-06-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
@@ -21,15 +21,23 @@
 
     <!-- Custom AI Configuration -->
     <url>
-        <loc>https://kalindu001.github.io/MoodFixer0/ai.html</loc>
+        <loc>https://moodfixer.netlify.app/ai.html</loc>
         <lastmod>2026-06-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
 
+    <!-- Download & Installation PWA -->
+    <url>
+        <loc>https://moodfixer.netlify.app/download.html</loc>
+        <lastmod>2026-06-11</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.80</priority>
+    </url>
+
     <!-- Safety & Crisis Help -->
     <url>
-        <loc>https://kalindu001.github.io/MoodFixer0/safety.html</loc>
+        <loc>https://moodfixer.netlify.app/safety.html</loc>
         <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.70</priority>
@@ -37,7 +45,7 @@
 
     <!-- Frequently Asked Questions -->
     <url>
-        <loc>https://kalindu001.github.io/MoodFixer0/faq.html</loc>
+        <loc>https://moodfixer.netlify.app/faq.html</loc>
         <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.60</priority>
@@ -45,7 +53,7 @@
 
     <!-- Privacy Policy -->
     <url>
-        <loc>https://kalindu001.github.io/MoodFixer0/privacy.html</loc>
+        <loc>https://moodfixer.netlify.app/privacy.html</loc>
         <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.50</priority>
@@ -53,7 +61,7 @@
 
     <!-- Terms of Use -->
     <url>
-        <loc>https://kalindu001.github.io/MoodFixer0/terms.html</loc>
+        <loc>https://moodfixer.netlify.app/terms.html</loc>
         <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.50</priority>

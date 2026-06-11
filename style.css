@@ -2550,3 +2550,207 @@ body.tutorial-active {
         padding-bottom: env(safe-area-inset-bottom);
     }
 }
+
+/* ============================================
+   Mobile Notifications & Mock Push System
+   ============================================ */
+
+/* Bottom Slide-up Banner Prompt */
+.mob-notification-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translate(-50%, 200px);
+    width: 90%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+    border-radius: 24px;
+    padding: 1.25rem 1.5rem;
+    z-index: 11000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease;
+    font-family: 'Outfit', sans-serif;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mob-notification-banner.show {
+    transform: translate(-50%, 0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.mob-notification-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mob-notification-icon {
+    font-size: 1.5rem;
+    background: rgba(255, 107, 107, 0.15);
+    color: var(--accent);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 107, 107, 0.2);
+}
+
+.mob-notification-title {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.mob-notification-body {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.mob-notification-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 0.2rem;
+}
+
+.mob-notification-btn {
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s ease;
+}
+
+.mob-notification-btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+}
+
+.mob-notification-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 107, 107, 0.3);
+}
+
+.mob-notification-btn-secondary {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+}
+
+.mob-notification-btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Top Slide-down Mock Push Notification (iOS / Android Look) */
+.mock-push-notification {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translate(-50%, -150px);
+    width: 92%;
+    max-width: 390px;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 12px 35px rgba(31, 38, 135, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 22px;
+    padding: 0.85rem 1.1rem;
+    z-index: 12000;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.mock-push-notification.show {
+    transform: translate(-50%, 0);
+}
+
+.mock-push-notification:hover {
+    transform: translate(-50%, 2px) scale(1.02);
+}
+
+.mock-push-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+
+.mock-push-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+}
+
+.mock-push-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mock-push-app-name {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #8e8e93;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.mock-push-time {
+    font-size: 0.7rem;
+    color: #8e8e93;
+}
+
+.mock-push-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #1c1c1e;
+}
+
+.mock-push-body {
+    font-size: 0.82rem;
+    color: #3a3a3c;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .mob-notification-banner {
+        bottom: calc(24px + env(safe-area-inset-bottom));
+    }
+}
+@supports (padding-top: env(safe-area-inset-top)) {
+    .mock-push-notification {
+        top: calc(16px + env(safe-area-inset-top));
+    }
+}

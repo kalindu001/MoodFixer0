@@ -116,18 +116,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const shouldPrompt = !isBlocked && 
                          (!lastPromptTime || (Date.now() - parseInt(lastPromptTime) > promptCooldown));
 
+    // Only show the welcome notification once per browsing session
+    const hasShownWelcome = sessionStorage.getItem('moodFixerWelcomeShown');
+
     if (hasPermission) {
-        // User has already granted permission: trigger both native and styled mock notifications
-        showMockNotification("Welcome Back! 🌟", "Your daily positive vibes are ready. Let's check in!");
-        triggerNativeNotification("Mood Fixer 🌟", "Welcome back! Ready to check in on your mood today?");
+        if (!hasShownWelcome) {
+            // User has already granted permission: trigger both native and styled mock notifications
+            showMockNotification("Welcome Back! 🌟", "Your daily positive vibes are ready. Let's check in!");
+            triggerNativeNotification("Mood Fixer 🌟", "Welcome back! Ready to check in on your mood today?");
+            sessionStorage.setItem('moodFixerWelcomeShown', 'true');
+        }
     } else if (notificationsSupported && !isBlocked && shouldPrompt) {
         // Request permissions: Show slide-up banner after a short delay
         setTimeout(() => {
             banner.classList.add('show');
         }, 2500);
     } else {
-        // Fallback: If not supported/blocked/in cooldown, show in-app notification only
-        showMockNotification("Welcome Back! 🌟", "Your daily positive vibes are ready. Let's check in!");
+        if (!hasShownWelcome) {
+            // Fallback: If not supported/blocked/in cooldown, show in-app notification only
+            showMockNotification("Welcome Back! 🌟", "Your daily positive vibes are ready. Let's check in!");
+            sessionStorage.setItem('moodFixerWelcomeShown', 'true');
+        }
     }
 
     // 7. Interactive Banner Event Listeners
